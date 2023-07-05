@@ -2,8 +2,17 @@
 	let message = '';
 	let conversation = [];
 	
-	function sendMessage() {
-		// We'll fill this in later to send the message to the server
+	async function sendMessage() {
+		const response = await fetch('/chat', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ message })
+		});
+		const data = await response.json();
+		conversation = [...conversation, { role: 'user', content: message }, { role: 'assistant', content: data }];
+		message = '';
 	}
 </script>
 
