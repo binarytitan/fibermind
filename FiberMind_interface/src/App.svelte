@@ -3,13 +3,6 @@
 </script>
 
 <main>
-    <Chat />
-</main>
-<script>
-    import Chat from './Chat.svelte';
-</script>
-
-<main>
     <h1>Welcome to the Chatbot!</h1>
     <Chat />
 </main>
