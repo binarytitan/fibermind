@@ -9,6 +9,9 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
+    if 'message' not in request.json:
+        return jsonify({'error': 'Missing "message" field in request'}), 400
+
     message = request.json['message']
     chat_model = "gpt-3.5-turbo"
     messages = [
