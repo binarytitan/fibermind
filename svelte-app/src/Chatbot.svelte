@@ -2,21 +2,20 @@
     let messages = [];
     let input = '';
 
-    import { OpenAI } from 'openai';
-
-    const openai = new OpenAI('your-openai-api-key');
-
     async function sendMessage() {
         messages.push({text: input, sender: 'user'});
         input = '';
 
-        const gptResponse = await openai.complete({
-            engine: 'gpt-3.5-turbo',
-            prompt: messages.map(message => `${message.sender}: ${message.text}`).join('\n'),
-            max_tokens: 60,
+        const res = await fetch('http://localhost:5000/message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({messages})
         });
+        const data = await res.json();
 
-        messages.push({text: gptResponse.data.choices[0].text.trim(), sender: 'bot'});
+        messages.push({text: data.message, sender: 'bot'});
     }
 </script>
 
