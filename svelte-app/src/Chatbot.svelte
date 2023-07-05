@@ -6,16 +6,23 @@
         messages.push({text: input, sender: 'user'});
         input = '';
 
-        const res = await fetch('http://localhost:5000/message', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({messages})
-        });
-        const data = await res.json();
-
-        messages.push({text: data.message, sender: 'bot'});
+        try {
+            const res = await fetch('http://localhost:5000/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({messages})
+            });
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const data = await res.json();
+            messages.push({text: data.message, sender: 'bot'});
+        } catch (error) {
+            console.error('A problem occurred while sending the message:', error);
+            messages.push({text: 'A problem occurred while sending the message.', sender: 'bot'});
+        }
     }
 </script>
 
