@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-from openai import OpenAI, GPT3Completion
+from openai import OpenAI
+from openai.api_resources.completion import Completion
 
 app = Flask(__name__)
 openai = OpenAI("your-openai-api-key")
@@ -10,7 +11,7 @@ def message():
     if 'messages' not in data:
         return jsonify({'error': 'No messages in request'}), 400
     prompt = '\n'.join([f"{message['sender']}: {message['text']}" for message in data['messages']])
-    response = openai.complete(
+    response = Completion.create(
         engine="gpt-3.5-turbo",
         prompt=prompt,
         max_tokens=60
