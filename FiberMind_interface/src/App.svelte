@@ -71,6 +71,8 @@
 		padding: 10px;
 		margin-bottom: 10px;
 		overflow-y: auto;
+		background-color: #f8f8f8;
+		border-radius: 10px;
 	}
 
 	#chat-input {
@@ -80,6 +82,22 @@
 	#chat-input input {
 		flex-grow: 1;
 		margin-right: 10px;
+		padding: 10px;
+		border-radius: 10px;
+		border: 1px solid #ccc;
+	}
+
+	#chat-input button {
+		padding: 10px;
+		background-color: #ff3e00;
+		color: white;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+
+	#chat-input button:hover {
+		background-color: #ff5e3a;
 	}
 
 	@media (min-width: 640px) {
