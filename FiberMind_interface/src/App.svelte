@@ -54,15 +54,32 @@
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
+		max-width: 600px;
 		margin: 0 auto;
 	}
 
 	h1 {
 		color: #ff3e00;
 		text-transform: uppercase;
-		font-size: 4em;
+		font-size: 2em;
 		font-weight: 100;
+	}
+
+	#chat-display {
+		height: 400px;
+		border: 1px solid #ccc;
+		padding: 10px;
+		margin-bottom: 10px;
+		overflow-y: auto;
+	}
+
+	#chat-input {
+		display: flex;
+	}
+
+	#chat-input input {
+		flex-grow: 1;
+		margin-right: 10px;
 	}
 
 	@media (min-width: 640px) {
