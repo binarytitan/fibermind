@@ -27,7 +27,13 @@
 	}
 
 	function scrollToBottom() {
-		// We'll fill this in later to scroll to the bottom of the chat display
+		tick().then(() => {
+			const chatDisplay = document.getElementById('chat-display');
+			const lastMessage = chatDisplay.lastElementChild;
+			if (lastMessage) {
+				lastMessage.scrollIntoView();
+			}
+		});
 	}
 </script>
 
