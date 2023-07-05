@@ -3,6 +3,9 @@
 	let conversation = [];
 	
 	async function sendMessage() {
+		if (message.trim() === '') {
+			return;
+		}
 		const response = await fetch('/chat', {
 			method: 'POST',
 			headers: {
@@ -13,6 +16,18 @@
 		const data = await response.json();
 		conversation = [...conversation, { role: 'user', content: message }, { role: 'assistant', content: data }];
 		message = '';
+		scrollToBottom();
+	}
+
+	function handleKeydown(event) {
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault();
+			sendMessage();
+		}
+	}
+
+	function scrollToBottom() {
+		// We'll fill this in later to scroll to the bottom of the chat display
 	}
 </script>
 
@@ -24,7 +39,7 @@
 		{/each}
 	</div>
 	<div id="chat-input">
-		<input bind:value={message} type="text" placeholder="Type your message here..." />
+		<input bind:value={message} on:keydown={handleKeydown} type="text" placeholder="Type your message here..." />
 		<button on:click={sendMessage}>Send</button>
 	</div>
 </main>
