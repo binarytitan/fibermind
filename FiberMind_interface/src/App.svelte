@@ -6,18 +6,24 @@
 		if (message.trim() === '') {
 			return;
 		}
-		const response = await fetch('/chat', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ message })
-		});
-		console.log(await response.text());
-		const data = await response.json();
-		conversation = [...conversation, { role: 'user', content: message }, { role: 'assistant', content: data }];
-		message = '';
-		scrollToBottom();
+		try {
+			const response = await fetch('/chat', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ message })
+			});
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			const data = await response.json();
+			conversation = [...conversation, { role: 'user', content: message }, { role: 'assistant', content: data }];
+			message = '';
+			scrollToBottom();
+		} catch (error) {
+			console.error('There was a problem with the fetch operation: ', error);
+		}
 	}
 
 	function handleKeydown(event) {
