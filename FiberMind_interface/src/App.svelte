@@ -13,6 +13,7 @@
 			},
 			body: JSON.stringify({ message })
 		});
+		console.log(await response.text());
 		const data = await response.json();
 		conversation = [...conversation, { role: 'user', content: message }, { role: 'assistant', content: data }];
 		message = '';
