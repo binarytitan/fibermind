@@ -19,7 +19,9 @@
     }
 
     afterUpdate(() => {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+        requestAnimationFrame(() => {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
     });
 </script>
 
