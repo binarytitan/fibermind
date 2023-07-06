@@ -1,9 +1,20 @@
 <script>
+    import { onMount } from 'svelte';
     let messages = [];
     let input = '';
 
     async function sendMessage() {
-        // TODO: Send message to server and update `messages`
+        const response = await fetch('http://localhost:5000/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: input })
+        });
+        const data = await response.json();
+
+        messages = [...messages, { role: 'user', content: input }, { role: 'bot', content: data }];
+        input = '';
     }
 </script>
 
