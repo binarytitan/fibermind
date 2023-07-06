@@ -11,8 +11,8 @@
 .aider.ident.cache.v1/cache.db
 .aider.tags.cache.v1/cache.db
 .aider.input.history
-aider
+/aider/
 node_modules
 Miniconda3-py310_23.3.1-0-Linux-x86_64.sh
 package-lock.json
-FiberMind_interface
+/FiberMind_interface/
