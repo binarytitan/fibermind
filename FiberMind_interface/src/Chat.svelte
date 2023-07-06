@@ -1,7 +1,8 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, afterUpdate } from 'svelte';
     let messages = [];
     let input = '';
+    let chatContainer;
 
     async function sendMessage() {
         const response = await fetch('http://localhost:5000/chat', {
@@ -16,10 +17,14 @@
         messages = [...messages, { role: 'user', content: input }, { role: 'bot', content: data }];
         input = '';
     }
+
+    afterUpdate(() => {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
 </script>
 
 <main>
-    <ul>
+    <ul bind:this={chatContainer}>
         {#each messages as message (message.id)}
             <li>{message.content}</li>
         {/each}
